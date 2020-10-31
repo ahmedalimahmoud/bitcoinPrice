@@ -3,7 +3,7 @@
 Laravel Project for Displaying ranged chart for bitcoin Pricing.
 
 # Table of contents
-- [Bitcoin Price](#Bitcoin Price)
+- [Bitcoin Price](#bitcoin-price)
 - [Table of contents](#table-of-contents)
 - [Requirements](#requirements)
 - [Installation](#installation)
