@@ -67,21 +67,6 @@ class BitcoinPriceTest extends TestCase
     }
     
     /**
-     * Test if end date is equal today.
-     *
-     * @return void
-     */
-    public function test_end_date_equal_today()
-    {
-        // show  actiual errors without handling
-        //$this->withoutExceptionHandling();
-        
-        $this->post('/', array_merge($this->data(),['end_date'=>'abc']))
-            ->assertSessionHasErrors('end_date');
-        
-    }
-
-    /**
      * test if start date is before 30 days from now.
      *
      * @return void
