@@ -103,8 +103,15 @@ class HomeController extends Controller
         
         // Filter Array       
         $filterdArray  = $this->filterArray($apiArray["bpi"],$startDate,$endDate); // filtered array
+        
+        // Json  array of filtered array keys      
+        $days = json_encode(array_keys($filterdArray)); // Json array
+        
+        // Json  array of filtered array values              
+        $prices = json_encode(array_values($filterdArray)); // Json array
+        
         // view index
-        return view('index',compact('filterdArray','startDate','endDate'));
+        return view('index',compact('days','prices','startDate','endDate'));
     
     }
     

@@ -22,7 +22,6 @@ Laravel Project for Displaying ranged chart for bitcoin Pricing.
 - XML PHP Extension
 - Composer
 
-` 
 
 # Installation
 
@@ -50,4 +49,10 @@ if you are using localhost folder you need to change APP_URL to your folder path
 - to run the project just run this command
 
 `php artisan serve`
+
+# Testing
+
+to run th test run this command.
+
+`php artisan test`
 
