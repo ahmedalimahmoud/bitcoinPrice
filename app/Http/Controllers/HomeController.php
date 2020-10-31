@@ -6,14 +6,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 
-class HomeController extends Controller
+class HomeController extends Controller implements HomeInterface
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    
     public function __construct()
     {
         $this->middleware('guest');
@@ -23,11 +22,11 @@ class HomeController extends Controller
     /**
      * get API data.
      *
-     * @return Array
+     * @return array
      */
-    
     public function api(): array
     {
+        // read json url and decode it to array 
         return json_decode(file_get_contents(
                 'https://api.coindesk.com/v1/bpi/historical/close.json'), true);
     }    
@@ -35,16 +34,16 @@ class HomeController extends Controller
     /**
      * Filter Json Array.
      *
-     * @param Array $array
-     * @param Date $startDate
-     * @param Date $endDate
-     * @return Array
+     * @param array $array
+     * @param date $startDate
+     * @param date $endDate
+     * @return array
      */
-    
-    public function filterArray($array,$startDate,$endDate): array
+    public function filterArray(array $array = [],string $startDate,string $endDate): array
     {
         // filter array based on start and end date
         $filteredArray = array_filter($array, function ($k) use ($startDate,$endDate) {
+            
                 // convert start date to timestamp
                $from = strtotime($startDate);
                 
@@ -65,14 +64,11 @@ class HomeController extends Controller
         return $filteredArray;
     }    
     
-    
-    
     /**
      * Display HomePage View.
      *
      * @return void
      */
-
     public function index(Request $request)
     {
         // get date from 7 days in Y-m-d format
@@ -80,7 +76,10 @@ class HomeController extends Controller
 
         // get today date in Y-m-d format
         $endDate   = date('Y-m-d'); // Y-m-d Date formate
-
+        
+        // Empty Variable
+        $success   = '';
+        
         // Validate if the request is post (Form Request) 
        if($request->isMethod('post'))
         {
@@ -95,6 +94,9 @@ class HomeController extends Controller
            
             // request end date
             $endDate = $request->end_date; 
+           
+           // Succsess Message
+            $success = 'Filtered Successfully';
             
         }
         
@@ -111,10 +113,8 @@ class HomeController extends Controller
         $prices = json_encode(array_values($filterdArray)); // Json array
         
         // view index
-        return view('index',compact('days','prices','startDate','endDate'));
+        return view('index',compact('days','prices','startDate','endDate'))->with('success',$success);;
     
     }
     
-    
 }
-    

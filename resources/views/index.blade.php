@@ -21,6 +21,12 @@
                 <!-- Start Card Body -->
                 <div class="card-body ">
                     
+                    @if($success)
+                       <div class="alert alert-success col-md-12">
+                            {{ $success }}
+                        </div>
+                    @endif
+
                     <!-- Start Form -->
                     <form method="POST" action="{{ route('index.update') }}/" class="row"> 
                         
